@@ -1,38 +1,349 @@
 .App {
   text-align: center;
+  font-family: Arial, sans-serif;
+  background: #f8f9fc;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
+  padding: 20px 10px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  gap: 120px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+}
+
+.card {
+  position: relative;
+  padding: 20px 40px;
+  text-align: center;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, #76063D, transparent);
+  background-size: 300% 300%;
+  animation: moveBorder 3s linear infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@keyframes moveBorder {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.name {
+  font-weight: 650;
+  font-size: 32px;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.role {
+  font-size: 20px;
+  font-weight: 550;
+  position: relative;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 28px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+  color: #76063D;
+}
+
+.nav a:hover::after {
+  content: "→";
+  position: absolute;
+  right: -20px;
+  top: 0;
+}
+
+#checkbox {
+  display: none;
+}
+
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  transition-duration: .5s;
+}
+
+.bars {
+  width: 100%;
+  height: 4px;
+  background-color: #76063D;
+  border-radius: 4px;
+}
+
+#bar2 {
+  transition-duration: .8s;
+}
+
+#bar1 {
+  width: 50%;
+}
+
+#bar2 {
+  width: 75%;
+}
+
+#checkbox:checked + .toggle .bars {
+  position: absolute;
+  transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle #bar2 {
+  transform: scaleX(0);
+  transition-duration: .1s;
+}
+
+#checkbox:checked + .toggle #bar1 {
+  width: 100%;
+  transform: rotate(45deg);
+  transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle #bar3 {
+  width: 100%;
+  transform: rotate(-45deg);
+  transition-duration: .5s;
+}
+
+#checkbox:checked + .toggle {
+  transition-duration: .5s;
+  transform: rotate(180deg);
+}
+
+.mobile-nav {
+  display: none;
+}
+
+@media (min-width: 1101px) {
+  .mobile-nav {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .nav {
+    display: none;
+  }
+  
+  .toggle {
+    display: flex;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .header {
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .card {
+    padding: 15px 30px;
+  }
+  
+  .name {
+    font-size: 18px;
+  }
+  
+  .role {
+    font-size: 13px;
+  }
+  
+  .mobile-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    gap: 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  
+  .mobile-nav a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+  
+  .mobile-nav a:hover {
+    color: #76063D;
+    text-decoration: underline;
+  }
+  
+  .mobile-nav a:hover::after {
+    content: "→";
+    margin-left: 10px;
+  }
+  
+  #checkbox:checked ~ .mobile-nav {
+    max-height: 400px;
+    padding: 20px;
+  }
+}
+
+.slider-container {
+  width: 100%;
+  margin: 20px 0;
+  position: relative;
+}
+
+.slider {
+  width: 100%;
+  height: 1000px;
+  overflow: hidden;
+  position: relative;
+  perspective: 1500px;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: slideTransition 5s ease-in-out infinite;
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.15) translate(-2%, -1%);
+  }
+}
+
+.image-text {
+  position: absolute;
+  bottom: 200px;
+  left: 100px;
   color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  z-index: 10;
 }
 
-.App-link {
-  color: #61dafb;
+.name-text {
+  font-size: 80px;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.role-text {
+  font-size: 30px;
+  font-weight: 500;
+  animation: typewriter 4s infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid white;
+}
+
+@keyframes typewriter {
+  0% {
+    width: 0;
   }
-  to {
-    transform: rotate(360deg);
+  25% {
+    width: 100%;
+  }
+  75% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
   }
 }
+
+
+
+.face-image {
+  object-fit: cover !important;
+  width: 100% !important;
+  object-position: center 30% !important;
+}
+
+@media (max-width: 768px) {
+  .image-text {
+    bottom: 60px !important;
+    left: 20px !important;
+  }
+  
+  .name-text {
+    font-size: 28px !important;
+  }
+  
+  .role-text {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-text {
+    bottom: 40px !important;
+    left: 15px !important;
+  }
+  
+  .name-text {
+    font-size: 20px !important;
+  }
+  
+  .role-text {
+    font-size: 16px !important;
+  }
+}
+
