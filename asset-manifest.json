@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/leader-presido/static/css/main.94b243b5.css",
-    "main.js": "/leader-presido/static/js/main.4d41ff78.js",
-    "index.html": "/leader-presido/index.html",
-    "main.94b243b5.css.map": "/leader-presido/static/css/main.94b243b5.css.map",
-    "main.4d41ff78.js.map": "/leader-presido/static/js/main.4d41ff78.js.map"
+    "main.css": "/static/css/main.94b243b5.css",
+    "main.js": "/static/js/main.4d41ff78.js",
+    "index.html": "/index.html",
+    "main.94b243b5.css.map": "/static/css/main.94b243b5.css.map",
+    "main.4d41ff78.js.map": "/static/js/main.4d41ff78.js.map"
   },
   "entrypoints": [
     "static/css/main.94b243b5.css",
